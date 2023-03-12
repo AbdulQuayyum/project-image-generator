@@ -1,4 +1,5 @@
 export const surpriseMePrompts = [
+    'Cat wearing crocs',
     'an armchair in the shape of an avocado',
     'a surrealist dream-like oil painting by Salvador Dalí of a cat playing checkers',
     'teddy bears shopping for groceries in Japan, ukiyo-e',

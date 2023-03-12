@@ -1,8 +1,9 @@
 {
   "name": "project-image-generator",
+  "author": "Abdul-Quayyum",
   "version": "1.0.0",
   "description": "an image generator application using React, MongoDB Express, Node and other technologies",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,6 +11,5 @@
     "type": "git",
     "url": "https://github.com/AbdulQuayyum/project-image-generator.git"
   },
-  "author": "Abdul-Quayyum",
   "license": "ISC"
 }
