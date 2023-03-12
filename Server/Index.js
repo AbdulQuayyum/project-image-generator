@@ -2,6 +2,10 @@ import express from "express";
 import * as dotenv from 'dotenv'
 import cors from 'cors'
 
+import connectDB from "./MongoDB/Connect.js";
+import dalleRoutes from './Routes/DalleRoutes.js'
+import postRoutes from './Routes/PostRoutes.js'
+
 dotenv.config()
 
 const app = express()
@@ -10,7 +14,7 @@ app.use(express.json({ limit: '50mb' }))
 
 app.get('/', async (req, res) => {
     res.status(200).json({
-        message: 'Hello from DALL.E!',
+        message: 'Heyy there, This is a Cat ',
     })
 })
 
