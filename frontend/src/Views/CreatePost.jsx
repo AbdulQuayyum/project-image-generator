@@ -1,4 +1,3 @@
-// window.process = {};
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -7,13 +6,6 @@ import { getRandomPrompt } from '../Utilities/Index'
 import Layout from "../Layout/Layout"
 import { Preview } from '../Assets/Index'
 
-let PORT
-if (import.meta.env.REACT_APP_STATUS === "development") {
-  PORT = import.meta.env.REACT_APP_DEV_ENDPOINT_URL
-} else {
-  PORT = import.meta.env.REACT_APP_PROD_ENDPOINT_URL
-}
-
 const CreatePost = () => {
   const navigate = useNavigate()
 
@@ -21,11 +13,27 @@ const CreatePost = () => {
   const [generatingImage, setGeneratingImage] = useState(false)
   const [loading, setLoading] = useState(false)
 
+  let PORT
+  if (import.meta.env.VITE_STATUS === "development") {
+    PORT = import.meta.env.VITE_DEV_ENDPOINT_URL
+  } else {
+    PORT = import.meta.env.VITE_PROD_ENDPOINT_URL
+  }
+
+  console.log(`${import.meta.env.VITE_STATUS} = ${PORT}`)
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt)
+    setForm({ ...form, prompt: randomPrompt })
+  }
+
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImage(true);
-        const response = await fetch('http://localhost:8080/api/v1/Soft', {
+        const response = await fetch(`${PORT}/api/v1/Soft`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -47,14 +55,32 @@ const CreatePost = () => {
     }
   }
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSurpriseMe = () => {
-    const randomPrompt = getRandomPrompt(form.prompt)
-    setForm({ ...form, prompt: randomPrompt })
+    if (form.prompt && form.photo) {
+      setLoading(true);
+      try {
+        const response = await fetch(`${PORT}/api/v1/Post`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ ...form }),
+        });
+
+        await response.json();
+        alert('Success');
+        navigate('/');
+      } catch (err) {
+        alert(err);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please generate an image with proper details');
+    }
   }
-
-  const handleSubmit = async (e) => { }
 
   return (
     <Layout>

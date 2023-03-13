@@ -9,7 +9,7 @@ const Header = () => {
                 <img src={Logo} alt="Logo" className="w-16 h-auto object-contain" />
             </Link>
 
-            <Link to="/create-post" className="font-inter font-medium bg-[#666e75] text-white px-4 py-2 rounded-md">Create</Link>
+            <Link to="/CreatePost" className="font-inter font-medium bg-[#666e75] text-white px-4 py-2 rounded-md">Create</Link>
         </header>
     )
 }
