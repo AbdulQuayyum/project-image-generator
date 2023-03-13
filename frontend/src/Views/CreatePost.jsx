@@ -1,3 +1,4 @@
+// window.process = {};
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -6,6 +7,13 @@ import { getRandomPrompt } from '../Utilities/Index'
 import Layout from "../Layout/Layout"
 import { Preview } from '../Assets/Index'
 
+let PORT
+if (import.meta.env.REACT_APP_STATUS === "development") {
+  PORT = import.meta.env.REACT_APP_DEV_ENDPOINT_URL
+} else {
+  PORT = import.meta.env.REACT_APP_PROD_ENDPOINT_URL
+}
+
 const CreatePost = () => {
   const navigate = useNavigate()
 
@@ -13,7 +21,31 @@ const CreatePost = () => {
   const [generatingImage, setGeneratingImage] = useState(false)
   const [loading, setLoading] = useState(false)
 
-  const generateImage = async () => { }
+  const generateImage = async () => {
+    if (form.prompt) {
+      try {
+        setGeneratingImage(true);
+        const response = await fetch(`${PORT}/api/v1/dalle`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            prompt: form.prompt,
+          }),
+        });
+
+        const data = await response.json();
+        setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
+      } catch (err) {
+        alert(err);
+      } finally {
+        setGeneratingImage(false);
+      }
+    } else {
+      alert('Please provide proper prompt');
+    }
+  }
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 
