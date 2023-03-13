@@ -3,8 +3,8 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 
 import connectDB from "./MongoDB/Connect.js";
-import dalleRoutes from './Routes/DalleRoutes.js'
-import postRoutes from './Routes/PostRoutes.js'
+import SoftRoutes from './Routes/SoftRoutes.js'
+import PostRoutes from './Routes/PostRoutes.js'
 
 dotenv.config()
 
@@ -12,12 +12,12 @@ const app = express()
 app.use(cors())
 app.use(express.json({ limit: '50mb' }))
 
-app.use('/api/v1/post', postRoutes);
-app.use('/api/v1/dalle', dalleRoutes);
+app.use('/api/v1/Post', PostRoutes);
+app.use('/api/v1/Soft', SoftRoutes);
 
 app.get('/', async (req, res) => {
     res.status(200).json({
-        message: 'Heyy there, This is a Cat ',
+        message: 'Heyy there, I am a Cat.',
     })
 })
 
