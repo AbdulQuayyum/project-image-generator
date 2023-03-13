@@ -20,7 +20,7 @@ const CreatePost = () => {
     PORT = import.meta.env.VITE_PROD_ENDPOINT_URL
   }
 
-  console.log(`${import.meta.env.VITE_STATUS} = ${PORT}`)
+  // console.log(`${import.meta.env.VITE_STATUS} = ${PORT}`)
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value })
 

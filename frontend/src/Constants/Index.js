@@ -31,7 +31,6 @@ export const surpriseMePrompts = [
     'an oil pastel drawing of an annoyed cat in a spaceship',
     'a painting of a Cat in the style of Starry Night',
     'A comic book cover of a cat wearing headphones',
-    'A centered explosion of colorful powder on a black background',
     'A Samurai Cat riding a Horse on Mars, lomography.',
     'A Cat standing in front of a stargate to another dimension',
     'A Cat working at a hotdog stand, lomography',
