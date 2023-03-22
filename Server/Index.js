@@ -22,22 +22,23 @@ app.get('/', async (req, res) => {
   });
 });
 
-let PORT;
-// process.env.STATUS === 'development'
-//   ? (PORT = process.env.DEV_ENDPOINT_URL)
-//   : (PORT = process.env.PROD_ENDPOINT_URL);
+// let PORT;
+// // process.env.STATUS === 'development'
+// //   ? (PORT = process.env.DEV_ENDPOINT_URL)
+// //   : (PORT = process.env.PROD_ENDPOINT_URL);
 
-if (process.env.STATUS === 'development') {
-  PORT = process.env.DEV_ENDPOINT_URL;
-} else {
-  PORT = process.env.PROD_ENDPOINT_URL;
-}
+// if (process.env.STATUS === 'development') {
+//   PORT = process.env.DEV_ENDPOINT_URL;
+// } else {
+//   PORT = process.env.PROD_ENDPOINT_URL;
+// }
 
 const StartServer = async () => {
   try {
     connectDB(process.env.MONGODB_URL);
-    app.listen(PORT, () => {
-      console.log(`Server is in ${process.env.STATUS} mode, listening on port ${PORT}`);
+    app.listen(8080, () => {
+      console.log("Cooking")
+      // console.log(`Server is in ${process.env.STATUS} mode, listening on port ${PORT}`);
     });
   } catch (error) {
     console.log(error);
